@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, inject, OnInit } from '@angular/core';
 import { FormGroup,FormBuilder,Validators } from '@angular/forms';
 import { ApiService } from '../services/api.service';
-import {MatDialogRef} from '@angular/material/dialog';
+import {MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatTestDialogOpenerModule} from '@angular/material/dialog/testing';
 
 @Component({
   selector: 'app-dialog',
@@ -10,11 +11,15 @@ import {MatDialogRef} from '@angular/material/dialog';
 })
 export class DialogComponent implements OnInit {
 
-
+  // const MAT_DIALOG_DATA: InjectionToken<any>;
     seasons: string[] = ['Brand new', 'secondHand', 'Refurbished'];
  
    productForm !: FormGroup;
-  constructor(private formBuilder :FormBuilder, private api:ApiService,private dialogRef:MatDialogRef<DialogComponent>) { }
+  constructor(private formBuilder :FormBuilder, private api:ApiService,
+    // @inject(MAT_DIALOG_DATA)() public editdata :Dialog,
+    public dialogRef: MatDialogRef<DialogComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any) { }
+   
 
   ngOnInit(): void {
 
@@ -28,7 +33,15 @@ export class DialogComponent implements OnInit {
 
    })
 
+ if(this.data){
 
+this.productForm.controls['productName'].setValue(this.data.productName);
+this.productForm.controls['category'].setValue(this.data.category);
+this.productForm.controls['freshness'].setValue(this.data.freshness);
+this.productForm.controls['price'].setValue(this.data.price);
+this.productForm.controls['comment'].setValue(this.data.comment);
+this.productForm.controls['date'].setValue(this.data.date);
+ }
   }
 
   addProduct(){
