@@ -13,7 +13,7 @@ export class DialogComponent implements OnInit {
 
   // const MAT_DIALOG_DATA: InjectionToken<any>;
     seasons: string[] = ['Brand new', 'secondHand', 'Refurbished'];
- 
+    actionBtn:string='save';
    productForm !: FormGroup;
   constructor(private formBuilder :FormBuilder, private api:ApiService,
     // @inject(MAT_DIALOG_DATA)() public editdata :Dialog,
@@ -34,7 +34,7 @@ export class DialogComponent implements OnInit {
    })
 
  if(this.data){
-
+ this.actionBtn='update';
 this.productForm.controls['productName'].setValue(this.data.productName);
 this.productForm.controls['category'].setValue(this.data.category);
 this.productForm.controls['freshness'].setValue(this.data.freshness);
@@ -45,23 +45,46 @@ this.productForm.controls['date'].setValue(this.data.date);
   }
 
   addProduct(){
-   
+  if(!this.data){
     if(this.productForm.valid){
-    this.api.postProduct(this.productForm.value)
-    .subscribe({
-    next:(res)=>{
-      alert("product added successfully")
-      this.productForm.reset();
-      this.dialogRef.close('save');
-    },
-    error:()=>{
-      alert("error while addingb thev product")
-    }
-
-
-    })
-
-
-    }
+      this.api.postProduct(this.productForm.value)
+      .subscribe({
+      next:(res)=>{
+        alert("product added successfully")
+        this.productForm.reset();
+        this.dialogRef.close('save');
+      },
+      error:()=>{
+        alert("error while addingb thev product")
+      }
+  
+  
+      })
+  
+  
+      }
+  }else{
+      this.updateProduct()
+  } 
+    
 }
+updateProduct(){
+this.api.putProduct(this.productForm.value,this.data.id)
+.subscribe({
+  next:(res)=>{
+    alert('product update succssfully');
+    this.productForm.reset();
+    this.dialogRef.close('update')
+  },
+  error:()=>{
+alert("error while update he data")
+  }
+})
+
+}
+
+
+
+
+
 }

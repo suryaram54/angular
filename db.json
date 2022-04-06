@@ -4,46 +4,19 @@
       "productName": "surya",
       "category": "vegatables",
       "freshness": "Brand new",
-      "price": 6,
-      "comment": "surya",
-      "date": "2022-04-23T18:30:00.000Z",
-      "id": 1
-    },
-    {
-      "productName": "surya",
-      "category": "vegatables",
-      "freshness": "Brand new",
       "price": 4,
       "comment": "surya",
       "date": "2022-04-23T18:30:00.000Z",
       "id": 2
     },
     {
-      "productName": "fjshdv",
-      "category": "fruits",
-      "freshness": "Brand new",
+      "productName": "anusha",
+      "category": "electronics",
+      "freshness": "secondHand",
       "price": 3,
       "comment": "fyj",
       "date": "1999-06-14T18:30:00.000Z",
       "id": 3
-    },
-    {
-      "productName": "anusha sis",
-      "category": "electronics",
-      "freshness": "Brand new",
-      "price": 7,
-      "comment": "gold",
-      "date": "2022-04-14T18:30:00.000Z",
-      "id": 4
-    },
-    {
-      "productName": "surt",
-      "category": "vegatables",
-      "freshness": "Brand new",
-      "price": 5,
-      "comment": "erf4g6g",
-      "date": "2022-04-06T18:30:00.000Z",
-      "id": 5
     }
   ],
   "comments": [

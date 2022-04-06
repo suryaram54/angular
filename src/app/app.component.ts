@@ -32,14 +32,28 @@ ngOnInit():void{
   openDialog() {
     this.dialog.open(DialogComponent, {
         width:'30%'
-    });
+    }).afterClosed().subscribe(val=>{
+
+      if(val=='save'){
+        this.getAllProduct();
+      }
+
+
+    })
   }
 
   editProduct(row : any){
      this.dialog.open(DialogComponent,{
     width:'30%',
     data:row
-     })
+     }).afterClosed().subscribe(val=>{
+
+      if(val=='update'){
+        this.getAllProduct();
+      }
+
+
+    })
 
 
 
@@ -63,6 +77,23 @@ getAllProduct(){
 
 
 }
+
+DeleteProduct(id:number){
+  this.api.deleteProduct(id)
+  .subscribe({
+    next:(res)=>{
+      alert('product Delted succssfully');
+      this.getAllProduct();
+    },
+    error:()=>{
+  alert("error while delete the  data")
+    }
+  })
+  
+  }
+
+
+
 applyFilter(event: Event) {
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
